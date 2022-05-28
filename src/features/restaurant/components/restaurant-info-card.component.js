@@ -1,74 +1,28 @@
 import React from "react";
-import { Text, Image, View } from "react-native";
-import styled from "styled-components/native";
-import { Card } from "react-native-paper";
+// import { Text, Image, View } from "react-native";
 import { SvgXml } from "react-native-svg";
 // SVG gambar star
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
+import { Spacer } from "../../../components/spacer/spacer.component";
+import { Text } from "../../../components/typography/text.component";
 
-// asalnya
-// background-color: white;
-// menjadi
-// background-color: ${(props) => props.theme.colors.bg.primary};
-const RestaurantCard = styled(Card)`
-  background-color: ${(props) => props.theme.colors.bg.primary};
-`;
-
-// asalnya
-// padding: 20px;
-// background-color: white;
-// menjadi
-// padding: ${(props) => props.theme.space[3]};
-// background-color: ${(props) => props.theme.colors.bg.primary};
-
-// Untuk spacing, karena 20px ga ada, kita cari yang terdekat, yaitu 16px
-// value 16px ada di index ke-3 di file spacing.js
-// export const space = ["0px", "4px", "8px", "16px", "32px", "64px"];
-
-// Kalau yang di dalam tanda kurung artinya spesifik component
-const RestaurantCardCover = styled(Card.Cover)`
-  padding: ${(props) => props.theme.space[3]};
-  background-color: ${(props) => props.theme.colors.bg.primary};
-`;
-
-// Penulisannya bisa juga seperti ini
-// const Title = styled.Text`
-// Penggunaan Theme , sebelumnya fixed
-// color: red;
-// Sekarang sudah berdasarkan theme
-// color: ${(props) => props.theme.colors.ui.primary};
-
-const Title = styled(Text)`
-  font-family: ${(props) => props.theme.fonts.heading};
-  font-size: ${(props) => props.theme.fontSizes.body};
-  color: ${(props) => props.theme.colors.ui.primary};
-`;
-
-const Address = styled(Text)`
-  font-family: ${(props) => props.theme.fonts.body};
-  font-size: ${(props) => props.theme.fontSizes.caption};
-`;
-
-const Info = styled.View`
-  padding: ${(props) => props.theme.space[3]};
-`;
-
-const Rating = styled.View`
-  flex-direction: row;
-  padding-top: ${(props) => props.theme.space[2]};
-  padding-bottom: ${(props) => props.theme.space[2]};
-`;
-
-const Section = styled.View`
-  flex-direction: row;
-  align-items: center;
-`;
-const SectionEnd = styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
+// =========================================================
+//  STYLED COMPONENT
+// =========================================================
+import {
+  RestaurantCard,
+  RestaurantCardCover,
+  Info,
+  Section,
+  SectionEnd,
+  Rating,
+  Icon,
+  Address,
+} from "./restaurant-info-card.styles";
+// =========================================================
+//  END OF STYLE COMPONENT
+// =========================================================
 
 export const RestaurantInfoCard = () => {
   const restoran = {
@@ -92,7 +46,7 @@ export const RestaurantInfoCard = () => {
           source={{ uri: "https://picsum.photos/700" }}
         />
         <Info>
-          <Title>{restoran.name}</Title>
+          <Text variant="label">{restoran.name}</Text>
           <Section>
             <Rating>
               {ratingArray.map(() => (
@@ -101,24 +55,20 @@ export const RestaurantInfoCard = () => {
             </Rating>
             <SectionEnd>
               {restoran.isClosedTemporarily && (
-                <Text variant="label" style={{ color: "red" }}>
-                  CLOSED TEMPORARILY
-                </Text>
+                <Text variant="error">CLOSED TEMPORARILY</Text>
               )}
-              <View style={{ paddingLeft: 16 }} />
-              {restoran.isOpenNow && (
-                <SvgXml xml={open} width={20} height={20} />
-              )}
-              <View style={{ paddingLeft: 16 }} />
-              <Image
-                style={{ width: 15, height: 15 }}
-                source={{ uri: restoran.icon }}
-              />
+              <Spacer position="left" size="large">
+                {restoran.isOpenNow && (
+                  <SvgXml xml={open} width={20} height={20} />
+                )}
+              </Spacer>
+              <Spacer position="left" size="large">
+                <Icon source={{ uri: restoran.icon }} />
+              </Spacer>
             </SectionEnd>
           </Section>
           <Address>{restoran.address}</Address>
         </Info>
-        <Title />
       </RestaurantCard>
     </>
   );
