@@ -69,3 +69,26 @@ yarn add react-native-paper
 yarn add styled-components
 ```
 
+### Install Google Font
+
+```bash
+expo install expo-font
+```
+
+Kemudian kita ambil contoh akan install 2 font :
+
+-   Oswald_400Regular
+-   Lato_400Regular
+
+Yang harus dilakukan adalah
+
+```bash
+expo install @expo-google-fonts/oswald
+expo install @expo-google-fonts/lato
+```
+
+### Menggunakan SVG
+
+```bash
+expo install react-native-svg
+```
